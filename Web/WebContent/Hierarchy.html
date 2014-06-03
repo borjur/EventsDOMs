@@ -1,0 +1,91 @@
+<html>
+
+<head>
+<link href="styles.css" type="text/css"/>
+<style type="text/css">
+  h1
+  {
+    color:red;
+  }
+
+  ul
+  {
+    padding:10px;
+    border:1px solid black;
+  }
+
+  li
+  {
+    border:1px dotted red;
+  }
+</style>
+<script language="javascript" src="DOM.js"></script>
+<script language="javascript">
+  function init()
+  {
+    for (var i=0; i<document.body.childNodes.length; i++)
+    {
+      AttachEvent(document.body.childNodes[i],"click",GetNodeInfo);
+    }
+  }
+
+  function GetNodeInfo(e)
+  {
+    if (!e) e = window.event;
+    var target = e.target || e.srcElement;
+    RemoveTextNodes(target.parentNode);
+    var msg = "You clicked on a " + target.nodeName + " element.";
+    msg += "\n * parentNode: " + target.parentNode.nodeName;
+    if(target.firstChild) msg += "\n * firstChild: " + target.firstChild.nodeName;
+    if(target.lastChild) msg += "\n * lastChild: " + target.lastChild.nodeName;
+    if(target.nextSibling) msg += "\n * nextSibling: " + target.nextSibling.nodeName;
+    if(target.previousSibling) msg += "\n * previousSibling: " + target.previousSibling.nodeName;
+    msg += "\n * childNodes.length: " + target.childNodes.length;
+
+    alert(msg);
+    return false; //To inactivate links and buttons
+  }
+</script>
+<title>Hierarchy</title>
+</head>
+<body onload="init()">
+  <h1>Heading 1</h1>
+  <p>Click on any element to get information about its position in the DOM.</p>
+  <h2>Heading 2</h2>
+  <ul>
+    <li>List Item 1</li>
+    <li>List Item 2</li>
+    <li>List Item 3</li>
+  </ul>
+  <hr />
+  <img src="logo.jpg" />
+  <hr />
+  <table>
+  <tr>
+    <th>Table Heading</th>
+    <th>Table Heading</th>
+    <th>Table Heading</th>
+  </tr>
+  <tr>
+    <td><a href="http://www.google.com">Link</a></td>
+    <td>Table Data</td>
+    <td>Table Data</td>
+  </tr>
+  <tr>
+    <td>Table Data</td>
+    <td>Table Data</td>
+    <td>Table Data</td>
+  </tr>
+  </table>
+  <form>
+    <input type="text" />
+    <select>
+      <option></option>
+      <option></option>
+    </select>
+    <textarea></textarea>
+    <input type="submit" />
+  </form>
+</body>
+
+</html>

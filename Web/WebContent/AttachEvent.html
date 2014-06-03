@@ -1,0 +1,64 @@
+<html>
+
+<head>
+<title>Events</title>
+<script type="text/javascript" src="DOM.js"></script>
+<script language="javascript">
+	function init()
+	{
+		var AddButton = document.getElementById("AddButton");
+		var SubtractButton = document.getElementById("SubtractButton");	
+		
+		/*
+			Write code so that...
+				- when AddButton is clicked the AddNumbers() function is called
+				- when SubtractButton is clicked the SubtractNumbers() function is called
+				- when either button is clicked the IncrementProblems() function is called
+		*/
+		AttachEvent(AddButton,"click",AddNumbers);
+		AttachEvent(SubtractButton,"click",SubtractNumbers);
+		AttachEvent(AddButton,"click",IncrementProblems);
+		AttachEvent(SubtractButton,"click",IncrementProblems);
+	}
+	
+	function AddNumbers(e)
+	{
+		if (!e) e = window.event;
+		var target = e.target || e.srcElement;
+		var num1 = target.parentNode.Num1.value;
+		var num2 = target.parentNode.Num2.value;
+		var result = Number(num1) + Number(num2);
+		target.parentNode.Result.value = result;
+	}
+	
+	function SubtractNumbers(e)
+	{
+		if (!e) e = window.event;
+		var target = e.target || e.srcElement;
+		var num1 = target.parentNode.Num1.value;
+		var num2 = target.parentNode.Num2.value;
+		var result = num1 - num2;
+		target.parentNode.Result.value = result;
+	}
+	
+	var numProbs=0;
+	function IncrementProblems()
+	{
+		numProbs++;
+		document.getElementById("NumProblems").innerHTML = numProbs;
+	}
+</script>
+</head>
+<body onload="init()">
+	<form onsubmit="return false">
+		Number: <input type="text" name="Num1" value="5"/><br/>
+		Number: <input type="text" name="Num2" value="5"/><br/>
+		<input type="button" id="AddButton" value="+"/>
+		<input type="button" id="SubtractButton" value="-"/><br/><br/>
+		Result: <input type="text" name="Result" value="0"/><br/>
+	</form>
+	<div>
+		Number of Problems: <span id="NumProblems">0</span>
+	</div>
+</body>
+</html>
